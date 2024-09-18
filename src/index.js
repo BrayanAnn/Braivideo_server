@@ -11,6 +11,7 @@ const app = express();
 
 const { port } = require('./config/config');
 const authRoutes = require('./routes/authRoutes');
+const videoRoutes = require('./routes/videoRoutes')
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -18,6 +19,7 @@ app.use(express.json());
 
 
 app.use('/auth', authRoutes);
+app.use('/video', videoRoutes)
 
 db.sync().then(() => {
   app.listen(port, () => {

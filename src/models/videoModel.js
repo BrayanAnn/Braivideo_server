@@ -15,6 +15,9 @@ const Video = sequelize.define('Video', {
     description:{
         type: DataTypes.TEXT,
     },
+    synopse:{
+        type: DataTypes.TEXT
+    },
     image: {
         type: DataTypes.TEXT,
     },

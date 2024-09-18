@@ -55,10 +55,8 @@ const register = async (req, res) => {
     if (existingEmail) {
       return res.status(400).send('Email já está em uso.');
     }
-    // Hash the password
-    const hashedPassword = await bcrypt.hash(password, 10); // 10 is the salt rounds
 
-    // Create a new user
+    const hashedPassword = await bcrypt.hash(password, 10); // 10 is the salt rounds
 
     const newUser = await User.create({
       first_name,
@@ -82,6 +80,7 @@ const register = async (req, res) => {
     res.status(500).send('Erro durante o registro de usuário. Por favor tente mais tarde.');
   }
 };
+
 
 module.exports = {
   login,
