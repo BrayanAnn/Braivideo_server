@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const { findUserByUsername, findUserById } = require('../models/userModel');
 const User = require('../models/userModel')
-const { secretKey } = require('../config/config');
+const { secretKey } = require('../config/config_env');
 
 const login = async(req, res) => {
 
@@ -80,6 +80,14 @@ const register = async (req, res) => {
     res.status(500).send('Erro durante o registro de usuário. Por favor tente mais tarde.');
   }
 };
+
+function userIsAdmin(userId){
+  try{
+    return User.findByPk(userId).admin
+  }catch(err){
+    return false
+  }
+}
 
 
 module.exports = {

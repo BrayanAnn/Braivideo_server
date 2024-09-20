@@ -9,9 +9,10 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const app = express();
 
-const { port } = require('./config/config');
+const { port } = require('./config/config_env');
 const authRoutes = require('./routes/authRoutes');
 const videoRoutes = require('./routes/videoRoutes')
+const adminRoutes = require('./routes/adminRoutes')
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -19,7 +20,8 @@ app.use(express.json());
 
 
 app.use('/auth', authRoutes);
-app.use('/video', videoRoutes)
+app.use('/video', videoRoutes);
+app.use('/admin', adminRoutes);
 
 db.sync().then(() => {
   app.listen(port, () => {
@@ -40,16 +42,16 @@ cloud.listBuckets((err, data) => {
   }
 });
 
-cloud.listObjects((err, data) => {
-  if (err) {
-    console.error('Erro ao listar buckets:', err);
-  } else {
-    console.log('Buckets disponíveis:');
-    data.forEach(bucket => {
-      console.log(bucket);
-    });
-  }
-})
+// cloud.listObjects((err, data) => {
+//   if (err) {
+//     console.error('Erro ao listar buckets:', err);
+//   } else {
+//     console.log('Buckets disponíveis:');
+//     data.forEach(bucket => {
+//       console.log(bucket);
+//     });
+//   }
+// })
 
 
 // Function to upload video to S3
